@@ -29,11 +29,13 @@ public class Drawing {
      * @param filename file name
      */
     public void draw(String format, String filename) {
-        // TODO: Do you notice any issues here?
+        // TODO: Do you notice any issues here? -> duplicates code for handling different file formats: JPEG & PNG
+        // Fix using Strategy Pattern, write interface for Writer
         if (format.equals("jpeg")) {
             try (Writer writer = new JPEGWriter(filename + ".jpeg")) {
                 for (Shape shape : this.shapes) {
-                    // TODO: What is the issue of the behavior here?
+                    // TODO: What is the issue of the behavior here? -> violates encapsulation
+                    // Move the responsibility of converting shapes to lines and drawing them into the Shape class
                     Line[] lines = shape.toLines();
                     shape.draw(writer, lines);
                 }
